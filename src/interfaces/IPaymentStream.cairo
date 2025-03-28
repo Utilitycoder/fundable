@@ -24,6 +24,16 @@ pub trait IPaymentStream<TContractState> {
         token: ContractAddress,
     ) -> u256;
 
+    /// @notice Deposits the provided amount to the stream
+    /// @param stream_id The ID of the stream to deposit to
+    /// @param amount The amount to deposit
+    fn deposit(ref self: TContractState, stream_id: u256, amount: u256);
+
+    /// @notice Deposit and Pause the stream
+    /// @param stream_id The ID of the stream to deposit and pause
+    /// @param amount The amount to deposit
+    fn deposit_and_pause(ref self: TContractState, stream_id: u256, amount: u256);
+
     /// @notice Withdraws the provided amount minus the protocol fee to the provided address
     /// @param stream_id The ID of the stream to withdraw from
     /// @param amount The amount to withdraw
@@ -191,6 +201,7 @@ pub trait IPaymentStream<TContractState> {
     /// @param token The ContractAddress of the token
     /// @param new_protocol_fee The new protocol fee of the token
     fn set_protocol_fee(ref self: TContractState, token: ContractAddress, new_protocol_fee: u256);
+
     /// @notice Check if a stream exists
     /// @param stream_id The ID of the stream
     /// @return Boolean indicating if the stream exists
@@ -234,6 +245,7 @@ pub trait IPaymentStream<TContractState> {
     /// @param stream_id The ID of the stream
     /// @return rate per second associated with the stream
     fn get_rate_per_second(self: @TContractState, stream_id: u256) -> UFixedPoint123x128;
+
     /// @notice Refunds a specified amount from a stream
     /// @param stream_id The ID of the stream from which to refund
     /// @param amount The amount to refund from the stream

@@ -12,6 +12,7 @@ pub struct Stream {
     pub cancelable: bool,
     pub token: ContractAddress,
     pub token_decimals: u8,
+    pub balance: u256,
     pub status: StreamStatus,
     pub rate_per_second: UFixedPoint123x128,
     pub last_update_time: u64,
